@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Titanion Robot Navigation</title>
+      <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+
+    <header style="background-image: url('img/header.jpg')">
+        <img src="img/ILVOlogo.jpg" alt="ILVO logo" style="padding: 15px;">
+    </header>
+    <body>
+        <div id="mySidenav" class="sidenav">
+            <span class="togglemenu" onclick="toggleNav()">&#9776;</span>
+            <div style="height: 60px;"></div>
+            <a href="#" onclick="setPidTuner()">PID-tuner</a>
+            <a href="#" onclick="setMapViewer()">Map-viewer</a>
+        </div>
+        
+        <div id="main"></div>
+
+        <script>
+            /* Side bar menu functions */
+            document.getElementById("mySidenav").style.width = "40px";
+            document.getElementById("main").style.marginLeft= "40px";
+            let open = false;
+            setPidTuner();
+
+            function toggleNav() {
+                if (!open) {
+                    document.getElementById("mySidenav").style.width = "220px";
+                    document.getElementById("main").style.marginLeft = "220px";
+                } else {
+                    document.getElementById("mySidenav").style.width = "40px";
+                    document.getElementById("main").style.marginLeft= "40px";
+                }
+                open = (!open);
+            }
+
+            function setPidTuner() {
+                document.getElementById("main").innerHTML='<object style="min-width:100%; min-height:500px;"  type="text/html" data="pid" ></object>';
+            }
+            function setMapViewer() {
+                document.getElementById("main").innerHTML='<object style="min-width:100%; min-height:500px;"  type="text/html" data="/map" ></object>';
+            }
+        </script>
+    </body>
+</html>

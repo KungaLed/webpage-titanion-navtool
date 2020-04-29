@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8">
+      <title>Pidtuner</title>
+      <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+      <link rel="stylesheet" type="text/css" href="styles.css">
+    </head>
+    <body>
+        <h1 class="panetitle">PID-Tuner</h1>
+        <div>
+            <button class="custom-button" id="savedatasequence">Save</button>
+        </div>
+        <br>
+        <div class="slidecontainer">
+			<label class="inputlabel">P[/]: </label>
+			<label class="inputlabel" id="inputlabelP">  </label><br>
+            <input type="range" min="0" max="1000" value="0" class="slider" id="inputsliderP">
+		</div>
+		<br>
+        <div class="slidecontainer">
+			<label class="inputlabel">I [/]: </label>
+			<label class="inputlabel" id="inputlabelI">  </label><br>
+            <input type="range" min="0" max="1000" value="0" class="slider" id="inputsliderI">
+		</div>
+		<br>
+        <div class="slidecontainer">
+			<label class="inputlabel">D [/]: </label>
+			<label class="inputlabel" id="inputlabelD">  </label><br>
+            <input type="range" min="0" max="1000" value="0" class="slider" id="inputsliderD">
+		</div>
+
+        <script src="pidtuner.js"></script>
+    </body>
+</html>
