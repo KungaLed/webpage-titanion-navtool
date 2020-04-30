@@ -67,6 +67,10 @@ class Serv(BaseHTTPRequestHandler):
         if "fonts/Flanders_Art_Sans_Medium.ttf" in self.path:
             print("FONT SOUGHT")
             self.path = "/webpage-titanion-navtool/fonts/Flanders_Art_Sans_Medium.ttf"
+        if "search-pointer" in self.path:
+            print("ROBOT PIC SOUGHT")
+            self.path = "/webpage-titanion-navtool/images/search-pointer.png"
+
               
         try:
             sendReply = False
@@ -80,6 +84,9 @@ class Serv(BaseHTTPRequestHandler):
             if self.path.endswith(".jpg"):
                 mimetype = "image/jpg"
                 sendReply = True 
+            if self.path.endswith(".png"):
+                mimetype = "image/png"
+                sendReply = True
 
             if self.path.endswith(".js"):
                 mimetype = "application/javascript"
@@ -95,22 +102,31 @@ class Serv(BaseHTTPRequestHandler):
                 if self.path == "/fetch":
                     #to make sure elif , else not executed
                     print("FETCH called")
-                elif mimetype != "image/jpg":
-                    f = open(self.path[1:])
-                else:
+                elif mimetype == "image/jpg":
+                    print("opening JPG FILE")
                     f = open(self.path[1:], "rb")
+                elif mimetype == "image/png":
+                    print("opening JPG FILE")
+                    f = open(self.path[1:], "rb")
+                else:
+                    print("Opening anything BUT image file")             
+                    f = open(self.path[1:])
                     
                 self.send_response(200)
-                self.send_header('Content-type',mimetype)
+                self.send_header("Content-type",mimetype)
                 self.end_headers()
+
                 if self.path == "/fetch":
                     updatecoords()
                     jsonString = json.dumps(coordinates) + "\r\n"
                     self.wfile.write(jsonString.encode("utf-8"))
-                elif mimetype == "image/jpg": 
+                elif mimetype == "image/jpg":
+                    self.wfile.write(f.read())
+                elif mimetype == "image/png":
                     self.wfile.write(f.read())
                 else:
                     self.wfile.write(f.read().encode("utf-8"))
+                #print(self.headers)
                 
             return
         except IOError.with_traceback:
